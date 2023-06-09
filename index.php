@@ -8,8 +8,10 @@
     Last update : 2023-06-09
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --->
  <?php
-// Include the API interrogation file
+// Include the RealT API interrogation file
 require('scripts/api/alltokens.php');
+// Include the Gnosis API interrogation file
+require('scripts/api/gnosis.php');
 
 $totalForAverage = 0;
 
@@ -37,8 +39,14 @@ $strLTUrlContractEthereum = "https://etherscan.io/token/" . $tabLatestRealTtoken
 foreach($tabAllRealTtokensWoOlds as $token) {
     $totalForAverage += $token->tokenPrice;
 }
+// Calculate the actual average token price
 $averageTokenPrice = $totalForAverage / $intRealTtokens;
 $averageTokenPriceFormatted = number_format($averageTokenPrice, 2, ".", " ");
+// Get last token supply
+$tabLastTokenSupply = executeGnosisRequest("stats", "tokensupply", $tabLatestRealTtoken->gnosisContract);
+$intLastTokenSupply = $tabLastTokenSupply->result / 1000000000000000000;
+$tabLastTokenHolders = executeGnosisRequest("token", "getTokenHolders", $tabLatestRealTtoken->gnosisContract);
+
  ?>
  <!--- --- --- --- --- --- --- --- RealT Personal Dashboard --- --- --- --- --- --- --- --- --- --- --- --->
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -48,7 +56,7 @@ $averageTokenPriceFormatted = number_format($averageTokenPrice, 2, ".", " ");
     <meta name="description" content="RealT personal dashboard (RPD): advanced personal dashboard for RealT tokens management">
     <meta name="keywords" content="RealT, blockchain, smart contract, smart contracts, web3, wallet, token, investment, portfolio, dashboard, real estate">
     <meta name="author" content="CoinMachine">
-    <favicon href="atom_Hero53.ico" />
+    <favicon href="media/icons/atom_Hero53.ico" />
 <!-- Google fonts, Bootstrap and CSS stylesheet -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="config/bootstrap/css/bootstrap.css">    
@@ -79,41 +87,50 @@ $averageTokenPriceFormatted = number_format($averageTokenPrice, 2, ".", " ");
 <!-- Home page content -->
         <section id="home-container" class="col-xl-10">
             <article id="home-informations" class="row">
-                <div class="hi-legend col-xl-6">RealT tokens actifs:</div>
-                <div class="hi-number col-xl-2"><?php echo $intRealTtokens; ?></div>
-                <div class="hi-legend col-xl-6">RealT tokens désaffectés :</div>
-                <div class="hi-number col-xl-2"><?php echo $intOldRealTtokens; ?></div>
-                <div class="hi-legend col-xl-6">Prix moyen d'un token :</div>
-                <div class="hi-number col-xl-2"><?php echo "$ " . $averageTokenPriceFormatted; ?></div>
-                <div class="offset-xl-1 col-xl-10">
+                <div id="global-informations" class="col-xl-4">
+                    <div class="row">
+                        <div class="hi-legend col-xl-9">RealT tokens actifs:</div>
+                        <div class="hi-number col-xl-3"><?php echo number_format($intRealTtokens, 0, ",", " ");?></div>
+                        <div class="hi-legend col-xl-9">RealT tokens désaffectés :</div>
+                        <div class="hi-number col-xl-3"><?php echo number_format($intOldRealTtokens, 0, ",", " ");?></div>
+                        <div class="hi-legend col-xl-9">Prix moyen d'un token :</div>
+                        <div class="hi-number col-xl-3"><?php echo "$ " . $averageTokenPriceFormatted; ?></div>
+                    </div>
+                </div>
+                <div class="col-xl-8">
                     <div id="home-last-token" class="row">
                     <h3 class=" col-xl-12">Dernier RealT token : <?php echo $datLastestToken; ?></h3>
                         <div class="hi-legend col-xl-4">Token</div>
-                        <div class="latest-infos col-xl-8"><?php echo $tabLatestRealTtoken->shortName; ?></div>
+                        <div class="latest-infos center col-xl-8"><?php echo $tabLatestRealTtoken->shortName; ?></div>
                         <div class="hi-legend col-xl-4">Adresse</div>
-                        <div class="latest-geo col-xl-8">
+                        <div class="latest-geo center col-xl-8">
                             <a href="<?php echo $strLTUrlBase;?>" target="_blank" title="Voir la géolocalisation de la propriété associée au token sur Google Maps..."><?php echo $tabLatestRealTtoken->fullName; ?><span class="fa-solid fa-up-right-from-square right-link"></span></a>
                         </div>
+                        <div class="hi-legend col-xl-4">Total token supply</div>
+                        <div class="latest-infos-last col-xl-8"><?php echo number_format($intLastTokenSupply, 0, ".", " ");?></div>
                         <div id="hlt-contract-title" class="col-xl-2">Contract</div>
                         <div class="col-xl-10">
                             <div class="row">
-                                <div class="latest-infos-title col-xl-4">Ethereum</div>
-                                <div class="latest-infos col-xl-8">
+                                <div class="latest-infos-title col-xl-2">Ethereum</div>
+                                <div class="latest-infos col-xl-9">
                                     <a href="<?php echo $strLTUrlContractEthereum;?>" target="_blank" title="Voir le smart contract du token sur Ethereum..."><?php echo $tabLatestRealTtoken->ethereumContract;?><span class="fa-solid fa-up-right-from-square right-link"></span></a>
                                 </div>
-                                <div class="latest-infos-title col-xl-4">Gnosis</div>
-                                <div class="latest-infos col-xl-8">
+                                <div class="latest-infos-title col-xl-2">Gnosis</div>
+                                <div class="latest-infos col-xl-9">
                                     <a href="<?php echo $strLTUrlContractGnosis;?>" target="_blank" title="Voir le smart contract du token sur Gnosis..."><?php echo $tabLatestRealTtoken->gnosisContract; ?><span class="fa-solid fa-up-right-from-square right-link"></span></a>
                                 </div>
                             </div>
                         </div>
+                        <div class="latest-infos-title col-xl-3">Top holder</div>
+                        <div class="latest-infos center col-xl-3"><?php echo $tabLastTokenHolders->result[0]->value/1000000000000000000 . " tokens";?></div>
+                        <div class="latest-infos col-xl-6"><?php echo $tabLastTokenHolders->result[0]->address;?></div>
                     </div>
                 </div>
             </article>
         </section>
 
 
-
+<!-- --- --- --- --- END OF CONTENT --- --- --- --- -->
     </section>
 <!-- JavaScript animations and DOM manipulations integrated script -->
     <script src="scripts/js/main.js"></script>

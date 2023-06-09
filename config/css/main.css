@@ -46,10 +46,6 @@ body {
     height: 100%;
     background-color: #222;
 }
-/*      User classes   */
-.align-right {
-    text-align: right;
-}
 /*      NAVIGATION */
 #main-nav {
     margin: 0 auto;
@@ -99,6 +95,9 @@ body {
 /*      Buttons    */
 
 /*      Regular tags    */
+hr {
+    color: #156cab;
+}
 a {
     text-decoration: none;
 }
@@ -175,35 +174,58 @@ img {
     font-family: "Fira Sans Condensed",sans-serif;
 }
 .hi-legend, .hi-number, .latest-infos-title, #hlt-contract-title {
-    font-size: 1.4em;
+    font-size: 1.2em;
 }
 .hi-legend {
     text-align: right;
+    color: #af9500;
 }
 .hi-number {
     text-align: right;
 }
 #home-informations h3 {
     margin-top: 5px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     text-align: center;
-    font-size: 1.4em;
+    font-size: 1.2em;
+    color: #af9500;
+}
+#global-informations {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    margin-top: 15px;
 }
 #home-last-token {
+    margin: 0;
     margin-top: 15px;
     padding: 10px;
-    border: 1px outset #156cab;
+    border-left: 1px outset #156cab;
 }
 #hlt-contract-title {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #af9500;
 }
 .latest-infos, .latest-infos-title, .latest-geo {
+    text-align: right;
+}
+.latest-geo, .latest-infos-last {
+    margin-bottom: 10px;
+}
+.latest-infos-last {
     text-align: center;
 }
-.latest-geo {
-    margin-bottom: 15px;
+.latest-infos-title {
+    color: #af9500;
 }
-
+/*      User classes   */
+.center {
+    text-align: center;
+}
+.align-right {
+    text-align: right;
+}
 /*    Animations    */
