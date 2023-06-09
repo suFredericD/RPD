@@ -26,7 +26,7 @@ function executeGnosisRequest($module, $action, $contractAddress){
     ];
     $headers = [
         'Accepts: application/json',
-        'X-CMC_PRO_API_KEY: 42068e1e-514f-4dc7-9383-ba6244e9c94e'
+        'X-CMC_PRO_API_KEY: ' . GNOSIS_KEY
     ];
     $qs = http_build_query($parameters);    // query string encode the parameters
     $request = "{$url}?{$qs}";              // create the request URL
@@ -66,7 +66,7 @@ function execGnosisRequestByAddress($module, $action, $Address){
     ];
     $headers = [
         'Accepts: application/json',
-        'X-CMC_PRO_API_KEY: 42068e1e-514f-4dc7-9383-ba6244e9c94e'
+        'X-CMC_PRO_API_KEY: ' . GNOSIS_KEY
     ];
     $qs = http_build_query($parameters);    // query string encode the parameters
     $request = "{$url}?{$qs}";              // create the request URL

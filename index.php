@@ -8,6 +8,8 @@
     Last update : 2023-06-09
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --->
  <?php
+// Include the access file
+require('admin/access.php');
 // Include the RealT API interrogation file
 require('scripts/api/alltokens.php');
 // Include the Gnosis API interrogation file
