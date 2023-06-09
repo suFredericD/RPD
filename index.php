@@ -29,7 +29,7 @@
     <img src="media/logos/RealT_Logo.svg" alt="modal-icon" class="modal-icon">
         <h1>RealT Personal Dashboard</h1>
     </section>
-<!-- Modal header -->
+<!-- Main menu -->
     <section id="content-container">
         <nav id="main-nav">
             <ul>
@@ -40,7 +40,9 @@
             </ul>
         </nav>
 
-
+        <div>
+            Number of RealT tokens :
+        </div>
 
 
 
