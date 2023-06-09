@@ -1,0 +1,131 @@
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    Project     : RealT personal dashboard (RPD)
+    Purpose     : build an advanced personal dashboard for RealT tokens management
+    File        : main.css
+    Description : main css file for the RPD project
+    Creation    : 2023-06-08
+    Author      : CoinMachine
+    Last update : 2023-06-08
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- */
+/*    Containers    */
+* {
+    box-sizing: border-box!important;
+}
+body {
+    display: block;
+    margin: 0;
+    padding: 0;
+    padding: 0;
+    background: #333;
+    border: 0;
+    outline: 0;
+    font-family: montserrat,Helvetica,Arial,Lucida,sans-serif!important;
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    vertical-align: baseline;
+}
+#content-container {
+    margin: 0 auto;
+    padding: 10px 0px;
+    border: 1px inset lightgreen;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    align-items: center;
+    background-color: #294378;
+}
+
+/*      User classes   */
+.align-right {
+    text-align: right;
+}
+/*      NAVIGATION */
+#main-nav {
+    margin: 0 auto;
+    padding: 0 5px;
+    font-family: "Fira Sans Condensed",sans-serif;
+}
+#main-nav ul, #main-nav ul li {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+}
+#main-nav ul li a{
+    margin-bottom: 5px;
+    color: #af9500;
+    text-decoration: none;
+}
+#main-nav ul li a:hover{
+    color: #156cab;
+    
+}
+/*      Inputs elements    */
+
+/*      Buttons    */
+
+/*      Regular tags    */
+a {
+    text-decoration: none;
+}
+/*      USER TABLES    */
+
+/*      COPY/PATE CLASSES AND STUFF    */
+h1, h2, h3, h4, h5, h6, input, textarea, select {
+    font-family: montserrat,Helvetica,Arial,Lucida,sans-serif!important;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #BBB;
+    padding-bottom: 10px;
+    line-height: 1em;
+    font-weight: 700;
+}
+h3, h4, h5, h6 {
+    font-weight: 500;
+}
+h5 {
+    font-weight: 350;
+    font-size: 16px;
+}
+html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    vertical-align: baseline;
+}
+img.modal-icon {
+    max-width: 100px;
+    width: 100%;
+    align-self: center;
+    margin-bottom: 10px;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+.pb_button {
+    padding: 0.3em 1em;
+    border: 4px solid #156cab;
+    border-radius: 50px;
+    background-color: #333;
+    color: #BBB;
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: .2 all ease-in-out;
+}
+.realt-special-button {
+    color: #90162d!important;
+    border-radius: 6px!important;
+    border-width: 3px!important;
+    border-color: #90162d!important;
+}
+/*    Animations    */
