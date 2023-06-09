@@ -5,36 +5,40 @@
     Description : home page of the dashboard
     Creation    : 2023-06-08
     Author      : CoinMachine
-    Last update : 2023-06-08
+    Last update : 2023-06-09
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --->
  <?php
- function getRealTtokens() {
-    $host = "https://api.realt.community/v1/";
-    $path = "tokenList";
-    $url = $host . $path;
-    $headers = [
-    'Accepts: application/json'
-    ];
-    $curl = curl_init();                    // Get cURL resource
-    $curlOptions = array(
-        CURLOPT_SSL_VERIFYHOST => false,    // Disable SSL verification of host name in the server certificate
-        CURLOPT_SSL_VERIFYPEER => false,    // Disable SSL verification of the SSL certificate on the server
-        CURLOPT_URL => $url,                // set the request URL
-        CURLOPT_HTTPHEADER => $headers,     // set the headers 
-        CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
-    );
-    // Set cURL options
-    curl_setopt_array($curl, $curlOptions);
-    $response = curl_exec($curl);           // Send the request, save the response
-    if(curl_errno($curl)){
-        echo curl_error($curl);
-    }
-    curl_close($curl);                      // Close request
-    return $response;
-}
-$tabAllRealTtokens = json_decode(getRealTtokens());
-$intRealTtokens = count($tabAllRealTtokens->tokens);
+// Include the API interrogation file
+require('scripts/api/alltokens.php');
 
+$totalForAverage = 0;
+
+// Get all RealT tokens informations
+$tabAllRealTtokens = getRealTtokens();
+foreach($tabAllRealTtokens as $token) {
+    if(substr_compare($token->shortName, "OLD-", 0, 4, true) != false) {
+        $tabAllRealTtokensWoOlds[] = $token;
+    } else {
+        $tabOldRealTtokens[] = $token;
+    }
+}
+// Number of RealT tokens
+$intRealTtokens = count($tabAllRealTtokensWoOlds);
+// Number of old RealT tokens
+$intOldRealTtokens = count($tabOldRealTtokens);
+// Get latest RealT token informations
+$tabLatestRealTtoken = executeRequest("token/lastUpdate");
+// Format the latest token date
+$datLastestToken = date_format(new DateTime($tabLatestRealTtoken->lastUpdate->date), "d/m/Y");
+// Format the latest token localization link
+$strLTUrlBase = "https://www.google.fr/maps/place/" . urlencode($tabLatestRealTtoken->fullName);
+$strLTUrlContractGnosis = "https://blockscout.com/xdai/mainnet/token/" . $tabLatestRealTtoken->gnosisContract;
+$strLTUrlContractEthereum = "https://etherscan.io/token/" . $tabLatestRealTtoken->ethereumContract;
+foreach($tabAllRealTtokensWoOlds as $token) {
+    $totalForAverage += $token->tokenPrice;
+}
+$averageTokenPrice = $totalForAverage / $intRealTtokens;
+$averageTokenPriceFormatted = number_format($averageTokenPrice, 2, ".", " ");
  ?>
  <!--- --- --- --- --- --- --- --- RealT Personal Dashboard --- --- --- --- --- --- --- --- --- --- --- --->
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -45,36 +49,74 @@ $intRealTtokens = count($tabAllRealTtokens->tokens);
     <meta name="keywords" content="RealT, blockchain, smart contract, smart contracts, web3, wallet, token, investment, portfolio, dashboard, real estate">
     <meta name="author" content="CoinMachine">
     <favicon href="atom_Hero53.ico" />
-<!-- CSS parameters and animations script -->
-    <link rel="stylesheet" type="text/css" href="config/bootstrap/bootstrap.css">    
-    <link rel="stylesheet" type="text/css" href="config/css/main.css">
+<!-- Google fonts, Bootstrap and CSS stylesheet -->
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="config/bootstrap/css/bootstrap.css">    
+    <link rel="stylesheet" type="text/css" href="config/css/main.css">
 </head>
 <body>
 <!-- Modal header -->
-    <section class="modal-header">
-    <img src="media/logos/RealT_Logo.svg" alt="modal-icon" class="modal-icon">
-        <h1>RealT Personal Dashboard</h1>
+    <section class="modal-header row">
+        <img src="media/logos/RealT_Logo.svg" alt="modal-icon" class="modal-icon col-xl-2" />
+        <nav class="col-xl-5"></nav>
+        <h1 id="site-title" class="col-xl-5">RealT Personal Dashboard</h1>
     </section>
 <!-- Main menu -->
-    <section id="content-container" class="col-12">
-        <nav id="main-nav" class="col-2">
+    <section id="content-container" class="row">
+        <nav id="main-nav" class="col-xl-2">
             <ul>
-                <li><a href="index.php">Home</a></li>
-                <li><a href="portfolio.php">Portfolio</a></li>
+                <img class="nav-logo" src="media/logos/rmmLogo.svg" />
+                <li class=""><a href="index.php">Home</a></li>
+                <li><a href="pages/portfolio.php">Portfolio</a></li><hr class="nav-hr">
+                <img class="nav-logo" src="media/logos/RealT_Logo.svg" />
+                <li><a href="https://realt.co/" target="_blank">Site principal</a></li>
+                <li><a href="https://rmm.realtoken.network/markets/" target="_blank">RealT Market Maker</a></li><hr>
 
-
+                <li><a href="https://realt.co/blog/" target="_blank">RealT Blog</a></li>
+                <li><a href="https://discord.gg/5TkxpQc" target="_blank">RealT Discord</a></li>
             </ul>
         </nav>
-
-        <div class="col-10">
-            Number of RealT tokens : <?php echo $intRealTtokens; ?>
-        </div>
+<!-- Home page content -->
+        <section id="home-container" class="col-xl-10">
+            <article id="home-informations" class="row">
+                <div class="hi-legend col-xl-6">RealT tokens actifs:</div>
+                <div class="hi-number col-xl-2"><?php echo $intRealTtokens; ?></div>
+                <div class="hi-legend col-xl-6">RealT tokens désaffectés :</div>
+                <div class="hi-number col-xl-2"><?php echo $intOldRealTtokens; ?></div>
+                <div class="hi-legend col-xl-6">Prix moyen d'un token :</div>
+                <div class="hi-number col-xl-2"><?php echo "$ " . $averageTokenPriceFormatted; ?></div>
+                <div class="offset-xl-1 col-xl-10">
+                    <div id="home-last-token" class="row">
+                    <h3 class=" col-xl-12">Dernier RealT token : <?php echo $datLastestToken; ?></h3>
+                        <div class="hi-legend col-xl-4">Token</div>
+                        <div class="latest-infos col-xl-8"><?php echo $tabLatestRealTtoken->shortName; ?></div>
+                        <div class="hi-legend col-xl-4">Adresse</div>
+                        <div class="latest-geo col-xl-8">
+                            <a href="<?php echo $strLTUrlBase;?>" target="_blank" title="Voir la géolocalisation de la propriété associée au token sur Google Maps..."><?php echo $tabLatestRealTtoken->fullName; ?><span class="fa-solid fa-up-right-from-square right-link"></span></a>
+                        </div>
+                        <div id="hlt-contract-title" class="col-xl-2">Contract</div>
+                        <div class="col-xl-10">
+                            <div class="row">
+                                <div class="latest-infos-title col-xl-4">Ethereum</div>
+                                <div class="latest-infos col-xl-8">
+                                    <a href="<?php echo $strLTUrlContractEthereum;?>" target="_blank" title="Voir le smart contract du token sur Ethereum..."><?php echo $tabLatestRealTtoken->ethereumContract;?><span class="fa-solid fa-up-right-from-square right-link"></span></a>
+                                </div>
+                                <div class="latest-infos-title col-xl-4">Gnosis</div>
+                                <div class="latest-infos col-xl-8">
+                                    <a href="<?php echo $strLTUrlContractGnosis;?>" target="_blank" title="Voir le smart contract du token sur Gnosis..."><?php echo $tabLatestRealTtoken->gnosisContract; ?><span class="fa-solid fa-up-right-from-square right-link"></span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </section>
 
 
 
     </section>
 <!-- JavaScript animations and DOM manipulations integrated script -->
-    <script src="index.js"></script>
+    <script src="scripts/js/main.js"></script>
+    <script src="https://kit.fontawesome.com/91b2ef136e.js" crossorigin="anonymous"></script>
 </body>
 </html>

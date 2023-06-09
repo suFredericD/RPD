@@ -5,20 +5,20 @@
     Description : main css file for the RPD project
     Creation    : 2023-06-08
     Author      : CoinMachine
-    Last update : 2023-06-08
+    Last update : 2023-06-09
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- */
 /*    Containers    */
 * {
     box-sizing: border-box!important;
 }
 body {
-    display: block;
     margin: 0;
     padding: 0;
     padding: 0;
-    background: #333;
+    background: #294378;
     border: 0;
     outline: 0;
+    color: #BBB;
     font-family: montserrat,Helvetica,Arial,Lucida,sans-serif!important;
     font-size: 100%;
     -ms-text-size-adjust: 100%;
@@ -27,18 +27,25 @@ body {
 }
 #content-container {
     margin: 0 auto;
-    padding: 10px 0px;
-    border: 1px inset lightgreen;
+    padding: 0;
+    background-color: #222;
 }
 .modal-header {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    margin: 0;
     padding: 1rem 1.5rem;
     align-items: center;
     background-color: #294378;
 }
-
+#home-container {
+    margin: 0;
+    padding: 10px;
+    width: 100%;
+    height: 100%;
+    background-color: #222;
+}
 /*      User classes   */
 .align-right {
     text-align: right;
@@ -48,20 +55,44 @@ body {
     margin: 0 auto;
     padding: 0 5px;
     font-family: "Fira Sans Condensed",sans-serif;
+    background-color: #333;
+    border: 1px inset #156cab;
 }
 #main-nav ul, #main-nav ul li {
     margin: 0 auto;
     padding: 0;
     list-style: none;
 }
+#main-nav ul li {
+    margin: 5px;
+    padding: 5px;
+}
 #main-nav ul li a{
-    margin-bottom: 5px;
-    color: #af9500;
+    margin: 5px;
+    color: #156cab;
     text-decoration: none;
 }
 #main-nav ul li a:hover{
-    color: #156cab;
-    
+    color: #af9500;
+}
+.nav-hr {
+    margin: 5px;
+    padding: 5px;
+    color: 1px solid #000;
+}
+.nav-logo {
+    margin: 0 auto;
+    padding: 0;
+    width: 45%;
+}
+.nav-icon {
+    margin: 0 auto;
+    padding: 0;
+    width: 30px;
+}
+.right-link {
+    font-size: 0.8em;
+    margin-left: 4px;
 }
 /*      Inputs elements    */
 
@@ -90,7 +121,10 @@ h5 {
     font-weight: 350;
     font-size: 16px;
 }
-html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
+html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a,
+abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, section, article {
     margin: 0;
     padding: 0;
     border: 0;
@@ -99,12 +133,6 @@ html, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, 
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     vertical-align: baseline;
-}
-img.modal-icon {
-    max-width: 100px;
-    width: 100%;
-    align-self: center;
-    margin-bottom: 10px;
 }
 img {
     max-width: 100%;
@@ -128,4 +156,54 @@ img {
     border-width: 3px!important;
     border-color: #90162d!important;
 }
+/* HEADER */
+.img.modal-icon {
+    max-width: 150px;
+    width: 100%;
+    align-self: center;
+    margin-bottom: 10px;
+}
+#site-title {
+    font-size: 1.8em;
+    font-weight: 800;
+    text-align: right;
+    font-variant: small-caps;
+    color: #BBB;
+}
+/*    HOME PAGE SPECIALS    */
+#home-container {
+    font-family: "Fira Sans Condensed",sans-serif;
+}
+.hi-legend, .hi-number, .latest-infos-title, #hlt-contract-title {
+    font-size: 1.4em;
+}
+.hi-legend {
+    text-align: right;
+}
+.hi-number {
+    text-align: right;
+}
+#home-informations h3 {
+    margin-top: 5px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 1.4em;
+}
+#home-last-token {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px outset #156cab;
+}
+#hlt-contract-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.latest-infos, .latest-infos-title, .latest-geo {
+    text-align: center;
+}
+.latest-geo {
+    margin-bottom: 15px;
+}
+
 /*    Animations    */
