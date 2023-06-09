@@ -8,7 +8,33 @@
     Last update : 2023-06-08
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --->
  <?php
- 
+ function getRealTtokens() {
+    $host = "https://api.realt.community/v1/";
+    $path = "tokenList";
+    $url = $host . $path;
+    $headers = [
+    'Accepts: application/json'
+    ];
+    $curl = curl_init();                    // Get cURL resource
+    $curlOptions = array(
+        CURLOPT_SSL_VERIFYHOST => false,    // Disable SSL verification of host name in the server certificate
+        CURLOPT_SSL_VERIFYPEER => false,    // Disable SSL verification of the SSL certificate on the server
+        CURLOPT_URL => $url,                // set the request URL
+        CURLOPT_HTTPHEADER => $headers,     // set the headers 
+        CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
+    );
+    // Set cURL options
+    curl_setopt_array($curl, $curlOptions);
+    $response = curl_exec($curl);           // Send the request, save the response
+    if(curl_errno($curl)){
+        echo curl_error($curl);
+    }
+    curl_close($curl);                      // Close request
+    return $response;
+}
+$tabAllRealTtokens = json_decode(getRealTtokens());
+$intRealTtokens = count($tabAllRealTtokens->tokens);
+
  ?>
  <!--- --- --- --- --- --- --- --- RealT Personal Dashboard --- --- --- --- --- --- --- --- --- --- --- --->
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -20,7 +46,8 @@
     <meta name="author" content="CoinMachine">
     <favicon href="atom_Hero53.ico" />
 <!-- CSS parameters and animations script -->
-    <link rel="stylesheet" type="text/css" href="main.css">
+    <link rel="stylesheet" type="text/css" href="config/bootstrap/bootstrap.css">    
+    <link rel="stylesheet" type="text/css" href="config/css/main.css">
     <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Source+Sans+Pro&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -30,8 +57,8 @@
         <h1>RealT Personal Dashboard</h1>
     </section>
 <!-- Main menu -->
-    <section id="content-container">
-        <nav id="main-nav">
+    <section id="content-container" class="col-12">
+        <nav id="main-nav" class="col-2">
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="portfolio.php">Portfolio</a></li>
@@ -40,8 +67,8 @@
             </ul>
         </nav>
 
-        <div>
-            Number of RealT tokens :
+        <div class="col-10">
+            Number of RealT tokens : <?php echo $intRealTtokens; ?>
         </div>
 
 
