@@ -92,8 +92,22 @@ body {
 }
 /*      Inputs elements    */
 
-/*      Buttons    */
-
+/*      FORMS    */
+.wallet_input {
+    padding: 0.3em 1em;
+    border: 1px solid #156cab;
+    border-radius: 50px;
+    background-color: #444;
+    color: #BBB;
+    font-size: 0.8em;
+    font-weight: normal;
+    text-decoration: none;
+}
+.wallet_input:hover {
+    background-color: #156cab;
+    color: #BBB;
+    border: 1px solid #BBB;
+}
 /*      Regular tags    */
 hr {
     color: #156cab;
@@ -141,13 +155,19 @@ img {
     padding: 0.3em 1em;
     border: 4px solid #156cab;
     border-radius: 50px;
-    background-color: #333;
-    color: #BBB;
-    font-size: 1em;
+    background-color: #BBB;
+    color: #333;
+    font-size: 0.9em;
     font-weight: 700;
     text-transform: uppercase;
     text-decoration: none;
-    transition: .2 all ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+.pb_button:hover {
+    background-color: #156cab;
+    color: #BBB;
+    border: 4px solid #BBB;
+    
 }
 .realt-special-button {
     color: #90162d!important;
@@ -201,7 +221,7 @@ img {
     margin: 0;
     margin-top: 15px;
     padding: 10px;
-    border-left: 1px outset #156cab;
+    border-top: 1px outset #156cab;
 }
 #hlt-contract-title {
     display: flex;

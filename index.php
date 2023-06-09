@@ -12,9 +12,12 @@
 require('scripts/api/alltokens.php');
 // Include the Gnosis API interrogation file
 require('scripts/api/gnosis.php');
+// Include the multi API interrogation file
+require('scripts/api/multiapi.php');
+// INclude the token data manipulation file
+require('scripts/php/tokendata.php');
 
 $totalForAverage = 0;
-
 // Get all RealT tokens informations
 $tabAllRealTtokens = getRealTtokens();
 foreach($tabAllRealTtokens as $token) {
@@ -42,10 +45,14 @@ foreach($tabAllRealTtokensWoOlds as $token) {
 // Calculate the actual average token price
 $averageTokenPrice = $totalForAverage / $intRealTtokens;
 $averageTokenPriceFormatted = number_format($averageTokenPrice, 2, ".", " ");
-// Get last token supply
+// Get last token supply and top10 holders
 $tabLastTokenSupply = executeGnosisRequest("stats", "tokensupply", $tabLatestRealTtoken->gnosisContract);
 $intLastTokenSupply = $tabLastTokenSupply->result / 1000000000000000000;
 $tabLastTokenHolders = executeGnosisRequest("token", "getTokenHolders", $tabLatestRealTtoken->gnosisContract);
+// Get last token price
+$intLastTokenPrice = $tabLatestRealTtoken->tokenPrice;
+// Get RealT protocol TVL
+$intRealTtvl = getRealTtvl();
 
  ?>
  <!--- --- --- --- --- --- --- --- RealT Personal Dashboard --- --- --- --- --- --- --- --- --- --- --- --->
@@ -87,7 +94,7 @@ $tabLastTokenHolders = executeGnosisRequest("token", "getTokenHolders", $tabLate
 <!-- Home page content -->
         <section id="home-container" class="col-xl-10">
             <article id="home-informations" class="row">
-                <div id="global-informations" class="col-xl-4">
+                <div id="global-informations" class="offset-xl-4 col-xl-6">
                     <div class="row">
                         <div class="hi-legend col-xl-9">RealT tokens actifs:</div>
                         <div class="hi-number col-xl-3"><?php echo number_format($intRealTtokens, 0, ",", " ");?></div>
@@ -95,19 +102,26 @@ $tabLastTokenHolders = executeGnosisRequest("token", "getTokenHolders", $tabLate
                         <div class="hi-number col-xl-3"><?php echo number_format($intOldRealTtokens, 0, ",", " ");?></div>
                         <div class="hi-legend col-xl-9">Prix moyen d'un token :</div>
                         <div class="hi-number col-xl-3"><?php echo "$ " . $averageTokenPriceFormatted; ?></div>
+                        <div class="hi-legend col-xl-9">Total Value Locked :</div>
+                        <div class="hi-number col-xl-3"><?php echo "$ " . number_format($intRealTtvl, 0, ".", " ");?></div>
                     </div>
                 </div>
-                <div class="col-xl-8">
+                <div class="col-xl-12">
                     <div id="home-last-token" class="row">
                     <h3 class=" col-xl-12">Dernier RealT token : <?php echo $datLastestToken; ?></h3>
                         <div class="hi-legend col-xl-4">Token</div>
-                        <div class="latest-infos center col-xl-8"><?php echo $tabLatestRealTtoken->shortName; ?></div>
+                        <div class="latest-infos center col-xl-7"><?php echo $tabLatestRealTtoken->shortName; ?></div>
                         <div class="hi-legend col-xl-4">Adresse</div>
-                        <div class="latest-geo center col-xl-8">
+                        <div class="latest-geo center col-xl-7">
                             <a href="<?php echo $strLTUrlBase;?>" target="_blank" title="Voir la géolocalisation de la propriété associée au token sur Google Maps..."><?php echo $tabLatestRealTtoken->fullName; ?><span class="fa-solid fa-up-right-from-square right-link"></span></a>
                         </div>
+                        <div class="hi-legend col-xl-4">Token price</div>
+                        <div class="latest-infos-last col-xl-7"><?php echo "$ " . number_format($intLastTokenPrice, 2, ".", " ");?></div>
                         <div class="hi-legend col-xl-4">Total token supply</div>
-                        <div class="latest-infos-last col-xl-8"><?php echo number_format($intLastTokenSupply, 0, ".", " ");?></div>
+                        <div class="latest-infos-last col-xl-7"><?php echo number_format($intLastTokenSupply, 0, ".", " ");?></div>
+                        <div class="latest-infos-title col-xl-4">Top holder</div>
+                        <div class="latest-infos center col-xl-2"><?php echo $tabLastTokenHolders->result[0]->value/1000000000000000000 . " tokens";?></div>
+                        <div class="latest-infos center col-xl-6"><?php echo $tabLastTokenHolders->result[0]->address;?></div>
                         <div id="hlt-contract-title" class="col-xl-2">Contract</div>
                         <div class="col-xl-10">
                             <div class="row">
@@ -121,9 +135,7 @@ $tabLastTokenHolders = executeGnosisRequest("token", "getTokenHolders", $tabLate
                                 </div>
                             </div>
                         </div>
-                        <div class="latest-infos-title col-xl-3">Top holder</div>
-                        <div class="latest-infos center col-xl-3"><?php echo $tabLastTokenHolders->result[0]->value/1000000000000000000 . " tokens";?></div>
-                        <div class="latest-infos col-xl-6"><?php echo $tabLastTokenHolders->result[0]->address;?></div>
+                        
                     </div>
                 </div>
             </article>
