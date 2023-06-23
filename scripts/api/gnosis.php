@@ -16,9 +16,6 @@
 // Return       : $response : decoded from json response of the API
 function executeGnosisRequest($module, $action, $contractAddress){
     $url = "https://blockscout.com/xdai/mainnet/api";
-    // $url .= "module=". $module;
-    // $url .= "&action=" . $action;
-    // $url .= "&contractaddress=" . $contractAddress;
     $parameters = [
         'module' => $module,
         'action' => $action,
@@ -26,11 +23,10 @@ function executeGnosisRequest($module, $action, $contractAddress){
     ];
     $headers = [
         'Accepts: application/json',
-        'X-CMC_PRO_API_KEY: ' . GNOSIS_KEY
+        'X-CMC_PRO_API_KEY: ' . constant("GNOSIS_KEY")
     ];
     $qs = http_build_query($parameters);    // query string encode the parameters
     $request = "{$url}?{$qs}";              // create the request URL
-    echo $request;
     $curl = curl_init();                    // Get cURL resource
     $curlOptions = array(
         CURLOPT_SSL_VERIFYHOST => false,    // Disable SSL verification of host name in the server certificate
@@ -54,19 +50,16 @@ function executeGnosisRequest($module, $action, $contractAddress){
 //          $action (string) : action to execute
 //          $contractAddress (string) : relatedcontract address
 // Return       : $response : decoded from json response of the API
-function execGnosisRequestByAddress($module, $action, $Address){
+function execGnosisRequestByAddress($module, $action, $address){
     $url = "https://blockscout.com/xdai/mainnet/api";
-    // $url .= "module=". $module;
-    // $url .= "&action=" . $action;
-    // $url .= "&address=" . $Address;
     $parameters = [
         'module' => $module,
         'action' => $action,
-        'address' => $Address
+        'address' => $address
     ];
     $headers = [
         'Accepts: application/json',
-        'X-CMC_PRO_API_KEY: ' . GNOSIS_KEY
+        'X-CMC_PRO_API_KEY: ' . constant("GNOSIS_KEY")
     ];
     $qs = http_build_query($parameters);    // query string encode the parameters
     $request = "{$url}?{$qs}";              // create the request URL

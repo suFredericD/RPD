@@ -25,6 +25,7 @@ $tabAllRealTtokens = getRealTtokens();
 foreach($tabAllRealTtokens as $token) {
     if(substr_compare($token->shortName, "OLD-", 0, 4, true) != false) {
         $tabAllRealTtokensWoOlds[] = $token;
+        $totalForAverage += $token->tokenPrice;
     } else {
         $tabOldRealTtokens[] = $token;
     }
@@ -33,6 +34,12 @@ foreach($tabAllRealTtokens as $token) {
 $intRealTtokens = count($tabAllRealTtokensWoOlds);
 // Number of old RealT tokens
 $intOldRealTtokens = count($tabOldRealTtokens);
+// Calculate the actual average token price
+$averageTokenPrice = $totalForAverage / $intRealTtokens;
+$averageTokenPriceFormatted = number_format($averageTokenPrice, 2, ".", " ");
+
+// Get RealT protocol TVL
+$intRealTtvl = getRealTtvl();
 // Get latest RealT token informations
 $tabLatestRealTtoken = executeRequest("token/lastUpdate");
 // Format the latest token date
@@ -44,18 +51,8 @@ $strLTUrlContractEthereum = "https://etherscan.io/token/" . $tabLatestRealTtoken
 foreach($tabAllRealTtokensWoOlds as $token) {
     $totalForAverage += $token->tokenPrice;
 }
-// Calculate the actual average token price
-$averageTokenPrice = $totalForAverage / $intRealTtokens;
-$averageTokenPriceFormatted = number_format($averageTokenPrice, 2, ".", " ");
-// Get last token supply and top10 holders
-$tabLastTokenSupply = executeGnosisRequest("stats", "tokensupply", $tabLatestRealTtoken->gnosisContract);
-$intLastTokenSupply = $tabLastTokenSupply->result / 1000000000000000000;
-$tabLastTokenHolders = executeGnosisRequest("token", "getTokenHolders", $tabLatestRealTtoken->gnosisContract);
 // Get last token price
 $intLastTokenPrice = $tabLatestRealTtoken->tokenPrice;
-// Get RealT protocol TVL
-$intRealTtvl = getRealTtvl();
-
  ?>
  <!--- --- --- --- --- --- --- --- RealT Personal Dashboard --- --- --- --- --- --- --- --- --- --- --- --->
  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -119,11 +116,6 @@ $intRealTtvl = getRealTtvl();
                         </div>
                         <div class="hi-legend col-xl-4">Token price</div>
                         <div class="latest-infos-last col-xl-7"><?php echo "$ " . number_format($intLastTokenPrice, 2, ".", " ");?></div>
-                        <div class="hi-legend col-xl-4">Total token supply</div>
-                        <div class="latest-infos-last col-xl-7"><?php echo number_format($intLastTokenSupply, 0, ".", " ");?></div>
-                        <div class="latest-infos-title col-xl-4">Top holder</div>
-                        <div class="latest-infos center col-xl-2"><?php echo $tabLastTokenHolders->result[0]->value/1000000000000000000 . " tokens";?></div>
-                        <div class="latest-infos center col-xl-6"><?php echo $tabLastTokenHolders->result[0]->address;?></div>
                         <div id="hlt-contract-title" class="col-xl-2">Contract</div>
                         <div class="col-xl-10">
                             <div class="row">
