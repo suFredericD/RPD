@@ -5,19 +5,14 @@
     Description : home page of the dashboard
     Creation    : 2023-06-08
     Author      : CoinMachine
-    Last update : 2023-06-09
+    Last update : 2023-06-23
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --->
- <?php
-// Include the access file
-require('admin/access.php');
-// Include the RealT API interrogation file
-require('scripts/api/alltokens.php');
-// Include the Gnosis API interrogation file
-require('scripts/api/gnosis.php');
-// Include the multi API interrogation file
-require('scripts/api/multiapi.php');
-// INclude the token data manipulation file
-require('scripts/php/tokendata.php');
+<?php
+require('admin/access.php');           // Include the access keys file
+require('scripts/api/alltokens.php');   // Include the RealT API interrogation file
+require('scripts/api/gnosis.php');      // Include the Gnosis API interrogation file
+require('scripts/api/multiapi.php');    // Include the multi API interrogation file
+require('scripts/php/tokendata.php');   // Include the token data file
 
 $totalForAverage = 0;
 // Get all RealT tokens informations
@@ -81,6 +76,7 @@ $intLastTokenPrice = $tabLatestRealTtoken->tokenPrice;
             <ul>
                 <img class="nav-logo" src="media/logos/rmmLogo.svg" />
                 <li class=""><a href="index.php">Home</a></li>
+                <li><a href="pages/dbStatus.php">DB status</a></li>
                 <li><a href="pages/portfolio.php">Portfolio</a></li><hr class="nav-hr">
                 <img class="nav-logo" src="media/logos/RealT_Logo.svg" />
                 <li><a href="https://realt.co/" target="_blank">Site principal</a></li>

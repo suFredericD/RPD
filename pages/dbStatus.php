@@ -1,9 +1,9 @@
 <!--- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
     Project     : RealT personal dashboard (RPD)
     Purpose     : build an advanced personal dashboard for RealT tokens management
-    File        : portfolio.php
-    Description : advanced portfolio page of the dashboard
-    Creation    : 2023-06-09
+    File        : dbStatus.php
+    Description : checking datadase status
+    Creation    : 2023-06-23
     Author      : CoinMachine
     Last update : 2023-06-23
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --->
@@ -12,15 +12,7 @@ require('../admin/access.php');             // Include the access keys file
 require('../scripts/api/alltokens.php');    // Include the RealT API interrogation file
 require('../scripts/api/gnosis.php');       // Include the Gnosis API interrogation file
 
-// Check if the wallet address is set in the URL
-if(isset($_GET['wallet']) && $_GET['wallet'] != ""){
-    $strPlaceHolder = $_GET['wallet'];
-    $objTokensBalances = execGnosisRequestByAddress("account", "tokenlist", $_GET['wallet']);
-} else {
-    $strPlaceHolder = "0x.....................";
-};
-// Get all RealT tokens informations
-$tabAllRealTtokens = getRealTtokens();
+$tabAllRealTtokens = getRealTtokens();      // Get all RealT tokens informations
 foreach($tabAllRealTtokens as $token) {
     if(substr_compare($token->shortName, "OLD-", 0, 4, true) != false) {
         $tabAllRealTtokensWoOlds[] = $token;
@@ -28,17 +20,11 @@ foreach($tabAllRealTtokens as $token) {
         $tabOldRealTtokens[] = $token;
     }
 }
-// Number of RealT tokens
-$intRealTtokens = count($tabAllRealTtokensWoOlds);
+$intRealTtokens = count($tabAllRealTtokensWoOlds);  // Number of RealT tokens
 
-$tabUserRealTokens = array();
-foreach($tabAllRealTtokens as $token) {
+foreach($tabAllRealTtokensWoOlds as $token) {
     
 }
-if(isset($_GET['wallet']) && $_GET['wallet'] != ""){
-    $tabToken = execGnosisRequestByAddressAndContract("account", "tokenbalance", "0xd4edB9c07F81a00C176C28f6e60009C012e76CEe", $_GET['wallet']);
-}
-print_r($tabToken);
 
 ?>
 <!--- --- --- --- --- --- --- --- RealT Personal Dashboard --- --- --- --- --- --- --- --- --- --- --- --->
@@ -60,12 +46,6 @@ print_r($tabToken);
 <!-- Modal header -->
     <section class="modal-header row">
         <img src="../media/logos/RealT_Logo.svg" alt="modal-icon" class="modal-icon col-xl-2" />
-        <form action="portfolio.php" method="get" class="col-xl-5">
-            <div class="row">
-                <input type="text" id="wallet" name="wallet" class="wallet_input offset-xl-2 col-xl-8" placeholder="<?php echo $strPlaceHolder;?>" aria-placeholder="<?php echo $strPlaceHolder;?>" />
-                <input type="submit" class="pb_button offset-xl-4 col-xl-4"  value="Check wallet" />
-            </div>
-        </form>
         <h1 id="site-title" class="col-xl-5">RealT Personal Dashboard</h1>
     </section>
 <!-- Main menu -->
