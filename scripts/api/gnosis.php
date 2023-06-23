@@ -33,7 +33,8 @@ function executeGnosisRequest($module, $action, $contractAddress){
         CURLOPT_SSL_VERIFYPEER => false,    // Disable SSL verification of the SSL certificate on the server
         CURLOPT_URL => $request,            // set the request URL
         CURLOPT_HTTPHEADER => $headers,     // set the headers 
-        CURLOPT_RETURNTRANSFER => 1         // ask for raw response instead of bool
+        CURLOPT_RETURNTRANSFER => 1,         // ask for raw response instead of bool
+        CURLOPT_PIPEWAIT => true               // wait for pipe connection to confirm
     );
     // Set cURL options
     curl_setopt_array($curl, $curlOptions);

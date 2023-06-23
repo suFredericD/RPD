@@ -5,7 +5,7 @@
     Description : main css file for the RPD project
     Creation    : 2023-06-08
     Author      : CoinMachine
-    Last update : 2023-06-09
+    Last update : 2023-06-23
  --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- */
 /*    Containers    */
 * {
@@ -19,7 +19,7 @@ body {
     border: 0;
     outline: 0;
     color: #BBB;
-    font-family: montserrat,Helvetica,Arial,Lucida,sans-serif!important;
+    font-family: Montserrat,Helvetica,Arial,Lucida,sans-serif!important;
     font-size: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
@@ -38,6 +38,7 @@ body {
     padding: 1rem 1.5rem;
     align-items: center;
     background-color: #294378;
+    font-family: "Helvetica", sans-serif;
 }
 #home-container {
     margin: 0;
@@ -118,9 +119,6 @@ a {
 /*      USER TABLES    */
 
 /*      COPY/PATE CLASSES AND STUFF    */
-h1, h2, h3, h4, h5, h6, input, textarea, select {
-    font-family: montserrat,Helvetica,Arial,Lucida,sans-serif!important;
-}
 h1, h2, h3, h4, h5, h6 {
     color: #BBB;
     padding-bottom: 10px;
@@ -183,6 +181,7 @@ img {
     margin-bottom: 10px;
 }
 #site-title {
+    font-family: "Helvetica", sans-serif;
     font-size: 1.8em;
     font-weight: 800;
     text-align: right;
@@ -190,9 +189,6 @@ img {
     color: #BBB;
 }
 /*    HOME PAGE SPECIALS    */
-#home-container {
-    font-family: "Fira Sans Condensed",sans-serif;
-}
 .hi-legend, .hi-number, .latest-infos-title, #hlt-contract-title {
     font-size: 1.2em;
 }

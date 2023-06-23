@@ -1,0 +1,452 @@
+/*-- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- ---
+    Project     : RealT personal dashboard (RPD)
+    Purpose     : build an advanced personal dashboard for RealT tokens management
+    File        : dbStatus.css
+    Description : dbStatus css file for the RPD project
+    Creation    : 2023-06-23
+    Author      : CoinMachine
+    Last update : 2023-06-23
+ --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- */
+:root {
+    --main-bg-color: #222;
+    --main-realt-blue: #294378;
+    --main-realt-blue-light: #156cab;
+    --main-realt-white: #BBB;
+
+}
+/*    Containers    */
+#dbstatus-container {
+    background-color: var(--main-realt-blue);
+}
+/*      NAVIGATION */
+
+/*      Inputs elements    */
+
+/*      Buttons    */
+
+/*      Regular tags    */
+
+/*      USER TABLES    */
+#db-details {
+    margin: 0;
+    vertical-align: middle;
+    align-items: center;
+}
+#db-details th {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-variant: small-caps;
+    color: var(--main-realt-white);
+    background-color: var(--main-realt-blue);
+    padding: 5px;
+}
+#db-details td {
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #000;
+    background-color: transparent;
+    padding: 5px;
+}
+#token-details {
+    margin: 10px auto;
+    vertical-align: middle;
+    align-items: center;
+    background-color: var(--main-realt-blue);
+}
+#token-details th {
+    align-items: center;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1.25em;
+    font-weight: bold;
+    font-variant: small-caps;
+    padding: 5px 0;
+    color: var(--main-realt-white);
+    background-color: var(--main-bg-color);
+}
+#token-details td {
+    align-items: center;
+    vertical-align: middle;
+    font-weight: 500;
+    background-color: transparent;
+    color: #000;
+}
+/*      TOKEN DETAILS    */
+.token-details-name {
+    width: 15%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.1em;
+    text-align: right;
+}
+.token-details-geo {
+    width: 30%;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9em;
+    text-align: center;
+}
+.token-details-geo a {
+    color: darkgray;
+    text-decoration: none;
+}
+.token-details-geo a span {
+    margin-left: 4px;
+}
+.token-details-geo a:hover {
+    color: var(--main-bg-color);
+    text-decoration: underline;
+}
+.token-details-price {
+    width: 7%;
+    font-family: "Fira Mono", monospace;
+    font-size: 0.9em;
+    text-align: right;
+}
+.token-details-supply {
+    width: 5%;
+    max-width: 5%;
+    font-family: "Fira Mono", monospace;
+    font-size: 0.9em;
+    text-align: right;
+}
+.token-details-marketcap {
+    width: 10%;
+    font-family: "Fira Mono", monospace;
+    font-size: 1em;
+    text-align: right;
+}
+.token-details-contract {
+    width: 30%;
+    font-family: "Fira Mono", monospace;
+    font-size: 0.8em;
+    text-align: center;
+    align-items: center;
+    vertical-align: middle;
+}
+.token-details-contract a {
+    align-items: center;
+    vertical-align: middle;
+}
+/*      User classes   */
+.token-contract {
+    margin-left: 4px;
+    max-width: 20px;
+    max-height: 20px;
+}
+/*    Animations    */
+
+/* *** *** *** MEDIA QUERIES *** *** *** */
+@media screen and (max-width: 1571px) {
+    #db-details th {
+        font-size: 1.5em;
+    }
+    #token-details th {
+        font-size: 1em;
+    }
+    .token-details-name {
+        width: 15%;
+        font-size: 1em;
+    }
+    .token-details-geo {
+        font-size: 0.9em;
+    }
+    .token-details-price {
+        width: 7%;
+        font-size: 0.8em;
+    }
+    .token-details-supply {
+        width: 5%;
+        max-width: 5%;
+        font-size: 0.8em;
+    }
+    .token-details-marketcap {
+        width: 10%;
+        font-size: 0.8em;
+    }
+    .token-details-contract {
+        font-size: 0.65em;
+    }
+}
+@media screen and (max-width: 1350px) {
+    #db-details th {
+        font-size: 1.5em;
+    }
+    #token-details th {
+        font-size: 1em;
+    }
+    .token-details-name {
+        width: 15%;
+        font-size: 0.9em;
+    }
+    .token-details-geo {
+        font-size: 0.8em;
+    }
+    .token-details-price {
+        width: 7%;
+        font-size: 0.75em;
+    }
+    .token-details-supply {
+        width: 5%;
+        max-width: 5%;
+        font-size: 0.75em;
+    }
+    .token-details-marketcap {
+        width: 10%;
+        font-size: 0.75em;
+    }
+    .token-details-contract {
+        font-size: 0.5em;
+    }
+    .token-contract {
+        margin-left: 2px;
+        max-width: 14px;
+        max-height: 14px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    #db-details th {
+        font-size: 1.5em;
+    }
+    #token-details th {
+        font-size: 1em;
+    }
+    .token-details-name {
+        width: 15%;
+        font-size: 0.8em;
+    }
+    .token-details-geo {
+        font-size: 0.75em;
+    }
+    .token-details-price {
+        width: 7%;
+        font-size: 0.7em;
+    }
+    .token-details-supply {
+        width: 5%;
+        max-width: 5%;
+        font-size: 0.7em;
+    }
+    .token-details-marketcap {
+        width: 10%;
+        font-size: 0.7em;
+    }
+    .token-details-contract {
+        font-size: 0.5em;
+    }
+    .token-contract {
+        margin-left: 2px;
+        max-width: 14px;
+        max-height: 14px;
+    }
+}
+@media screen and (max-width: 992px) {
+    #db-details th {
+        font-size: 1.25em;
+    }
+    #token-details th {
+        font-size: 0.9em;
+    }
+    .token-details-name {
+        width: 15%;
+        font-size: 0.75em;
+    }
+    .token-details-geo {
+        font-size: 0.65em;
+    }
+    .token-details-price {
+        width: 7%;
+        font-size: 0.6em;
+    }
+    .token-details-supply {
+        width: 5%;
+        max-width: 5%;
+        font-size: 0.65em;
+    }
+    .token-details-marketcap {
+        width: 10%;
+        font-size: 0.6em;
+    }
+    .token-details-contract {
+        font-size: 0.4em;
+    }
+    .token-contract {
+        margin-left: 2px;
+        max-width: 10px;
+        max-height: 10px;
+    }
+}
+@media screen and (max-width: 768px) {
+    #db-details th {
+        font-size: 1em;
+    }
+    #db-details td {
+        font-size: 0.8em;    
+    }
+    #token-details th {
+        font-size: 0.8em;
+    }
+    .token-details-name {
+        width: 15%;
+        font-size: 0.7em;
+    }
+    .token-details-geo {
+        font-size: 0.6em;
+    }
+    .token-details-price {
+        width: 7%;
+        font-size: 0.55em;
+    }
+    .token-details-supply {
+        width: 5%;
+        max-width: 5%;
+        font-size: 0.5em;
+    }
+    .token-details-marketcap {
+        width: 10%;
+        font-size: 0.55em;
+    }
+    .token-details-contract {
+        max-width: 20%;
+    }
+    .token-details-contract span {
+        display: none;
+    }
+    .token-contract {
+        margin: 0 2px;
+        max-width: 18px;
+        max-height: 18px;
+    }
+}
+@media screen and (max-width: 576px) {
+    #db-details th {
+        font-size: 0.9em;
+    }
+    #db-details td {
+        font-size: 0.75em;    
+    }
+    #token-details th {
+        font-size: 0.8em;
+    }
+    .token-details-name {
+        width: 15%;
+        font-size: 0.6em;
+    }
+    .token-details-geo {
+        font-size: 0.5em;
+    }
+    .token-details-price {
+        width: 7%;
+        font-size: 0.3em;
+    }
+    .token-details-supply {
+        width: 5%;
+        max-width: 5%;
+        font-size: 0.4em;
+    }
+    .token-details-marketcap {
+        width: 10%;
+        font-size: 0.3em;
+    }
+    .token-details-contract {
+        max-width: 20%;
+    }
+    .token-details-contract span {
+        display: none;
+    }
+    .token-contract {
+        margin: 0 2px;
+        max-width: 18px;
+        max-height: 18px;
+    }
+}
+@media screen and (max-width: 480px) {
+    #db-details th {
+        font-size: 0.7em;
+    }
+    #db-details td {
+        font-size: 0.65em;    
+    }
+    #token-details th {
+        font-size: 0.5em;
+    }
+    .token-details-name {
+        max-width: 20%;
+        font-size: 0.3em;
+    }
+    .token-details-geo {
+        max-width: 20%;
+        font-size: 0.2em;
+    }
+    .token-details-price {
+        min-width: 15%;
+        font-size: 0.15em;
+    }
+    .token-details-supply {
+        min-width: 10%;
+        max-width: 5%;
+        font-size: 0.2em;
+    }
+    .token-details-marketcap {
+        min-width: 15%;
+        font-size: 0.15em;
+    }
+    .token-details-contract {
+        min-width: 10%;
+        max-width: 10%;
+    }
+    .token-details-contract span {
+        display: none;
+    }
+    .token-contract {
+        margin: 0 1px;
+        max-width: 8px;
+        max-height: 8px;
+    }
+}
+@media screen and (max-width: 360px) {
+    #db-details th {
+        font-size: 0.5em;
+    }
+    #db-details td {
+        font-size: 0.4em;    
+    }
+    #token-details th {
+        font-size: 0.4em;
+    }
+    .token-details-name {
+        max-width: 20%;
+        font-size: 0.15em;
+    }
+    .token-details-geo {
+        max-width: 20%;
+        font-size: 0.1em;
+    }
+    .token-details-price {
+        min-width: 15%;
+        font-size: 0.1em;
+    }
+    .token-details-supply {
+        min-width: 10%;
+        max-width: 5%;
+        font-size: 0.15em;
+    }
+    .token-details-marketcap {
+        min-width: 15%;
+        font-size: 0.1em;
+    }
+    .token-details-contract {
+        min-width: 10%;
+        max-width: 10%;
+    }
+    .token-details-contract span {
+        display: none;
+    }
+    .token-contract {
+        margin: 0 1px;
+        max-width: 8px;
+        max-height: 8px;
+    }
+}

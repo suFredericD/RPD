@@ -59,7 +59,7 @@ $intLastTokenPrice = $tabLatestRealTtoken->tokenPrice;
     <meta name="author" content="CoinMachine">
     <favicon href="media/icons/atom_Hero53.ico" />
 <!-- Google fonts, Bootstrap and CSS stylesheet -->
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans+Condensed|Montserrat|Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="config/bootstrap/css/bootstrap.css">    
     <link rel="stylesheet" type="text/css" href="config/css/main.css">
 </head>
@@ -91,14 +91,14 @@ $intLastTokenPrice = $tabLatestRealTtoken->tokenPrice;
             <article id="home-informations" class="row">
                 <div id="global-informations" class="offset-xl-4 col-xl-6">
                     <div class="row">
-                        <div class="hi-legend col-xl-9">RealT tokens actifs:</div>
-                        <div class="hi-number col-xl-3"><?php echo number_format($intRealTtokens, 0, ",", " ");?></div>
-                        <div class="hi-legend col-xl-9">RealT tokens désaffectés :</div>
-                        <div class="hi-number col-xl-3"><?php echo number_format($intOldRealTtokens, 0, ",", " ");?></div>
-                        <div class="hi-legend col-xl-9">Prix moyen d'un token :</div>
-                        <div class="hi-number col-xl-3"><?php echo "$ " . $averageTokenPriceFormatted; ?></div>
-                        <div class="hi-legend col-xl-9">Total Value Locked :</div>
-                        <div class="hi-number col-xl-3"><?php echo "$ " . number_format($intRealTtvl, 0, ".", " ");?></div>
+                        <div class="hi-legend col-xl-8">RealT tokens actifs:</div>
+                        <div class="hi-number col-xl-4"><?php echo number_format($intRealTtokens, 0, ",", " ");?></div>
+                        <div class="hi-legend col-xl-8">RealT tokens désaffectés :</div>
+                        <div class="hi-number col-xl-4"><?php echo number_format($intOldRealTtokens, 0, ",", " ");?></div>
+                        <div class="hi-legend col-xl-8">Prix moyen d'un token :</div>
+                        <div class="hi-number col-xl-4"><?php echo "$ " . $averageTokenPriceFormatted; ?></div>
+                        <div class="hi-legend col-xl-8">Total Value Locked :</div>
+                        <div class="hi-number col-xl-4"><?php echo "$ " . number_format($intRealTtvl, 0, ".", " ");?></div>
                     </div>
                 </div>
                 <div class="col-xl-12">
